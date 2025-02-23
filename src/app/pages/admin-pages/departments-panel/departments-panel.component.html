@@ -1,0 +1,27 @@
+<div class="departments-container">
+  <div *ngFor="let department of departments" class="department-card">
+    <div *ngIf="editingDepartment && editingDepartment.id === department.id; else viewMode">
+      <!-- Форма редагування -->
+      <form class="edit-form" (ngSubmit)="saveEdit()">
+        <input type="text" [(ngModel)]="editingDepartment.name" placeholder="Department Name" required />
+        <textarea [(ngModel)]="editingDepartment.description" placeholder="Description" required></textarea>
+        <button type="submit" class="btn">Save</button>
+        <button type="button" class="btn cancel" (click)="cancelEditing()">Cancel</button>
+      </form>
+    </div>
+
+    <ng-template #viewMode>
+      <h3>{{ department.name }}</h3>
+      <p>{{ department.description }}</p>
+      <button class="btn" (click)="startEditing(department)">Edit</button>
+      <button class="btn delete" (click)="deleteDepartment(department.id)">Delete</button>
+    </ng-template>
+  </div>
+
+  <!-- Форма створення відділу -->
+  <form class="create-form" (ngSubmit)="createDepartment()">
+    <input type="text" [(ngModel)]="newDepartment.name" name="name" placeholder="Department Name" required />
+    <textarea [(ngModel)]="newDepartment.description" name="description" placeholder="Description" required></textarea>
+    <button type="submit" class="btn">Create Department</button>
+  </form>
+</div>

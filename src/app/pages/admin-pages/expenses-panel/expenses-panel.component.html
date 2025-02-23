@@ -1,0 +1,58 @@
+<div class="expenses-panel">
+  <h2>Панель витрат</h2>
+
+  <div class="filters">
+    <label>
+      Відділ:
+      <select [(ngModel)]="selectedDepartment" (change)="filterEmployees(); filterExpenses()">
+        <option *ngFor="let dept of departments" [value]="dept._id">{{ dept.name }}</option>
+      </select>
+    </label>
+
+    <label>
+      Співробітник:
+      <select [(ngModel)]="selectedEmployee" (change)="filterExpenses()">
+        <option *ngFor="let emp of filteredEmployees" [value]="emp._id">{{ emp.firstname + ' ' + emp.lastname }}
+        </option>
+      </select>
+    </label>
+
+    <button (click)="resetFilters()">Очистити фільтри</button>
+
+  </div>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Сума</th>
+      <th>Дата</th>
+      <th>Тип витрати</th>
+      <th>Дія</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let expense of filteredExpenses">
+      <td>{{ expense.sum }}</td>
+      <td>{{ expense.date | date }}</td>
+      <td>{{ expense.expenseType.name }}</td>
+      <td>
+        <button (click)="editExpense(expense)">Редагувати</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="editingExpense" class="edit-form">
+    <h3>Редагування витрати</h3>
+    <form [formGroup]="editForm" (ngSubmit)="saveExpense()">
+      <label>Сума: <input formControlName="sum" type="number"/></label>
+      <label>Дата: <input formControlName="date" type="date"/></label>
+      <label>Тип:
+        <select formControlName="expenseType">
+          <option *ngFor="let type of expenseTypes" [value]="type._id">{{ type.name }}</option>
+        </select>
+      </label>
+      <button type="submit">Зберегти</button>
+    </form>
+  </div>
+</div>

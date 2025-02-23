@@ -1,0 +1,37 @@
+<div class="filters">
+  <label for="department">Department</label>
+  <select id="department" [(ngModel)]="filters.department">
+    <option *ngFor="let department of departments" [value]="department">{{ department }}</option>
+  </select>
+
+  <label for="month">Month</label>
+  <input type="month" id="month" [(ngModel)]="filters.month">
+
+  <button class="btn" (click)="applyFilters()">Apply Filters</button>
+</div>
+
+<table class="budget-table">
+  <thead>
+  <tr>
+    <th>Department</th>
+    <th>Month</th>
+    <th>Year</th>
+    <th>Budget</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let budget of filteredBudgets">
+    <td>{{ budget.department }}</td>
+    <td>{{ budget.month }}</td>
+    <td>{{ budget.year }}</td>
+    <td>{{ budget.amount | currency }}</td>
+    <td>
+      <button class="btn" (click)="editBudget(budget)">Edit</button>
+      <button class="btn" (click)="deleteBudget(budget.id)">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<button class="btn" (click)="openCreateForm()">Create New Budget</button>

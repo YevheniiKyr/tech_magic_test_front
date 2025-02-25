@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ExpenseService} from '../../../services/expense.service';
 import {DepartmentService} from '../../../services/department.service';
-import {EmployeeService} from '../../../services/employee.service';
+import {UserService} from '../../../services/user.service';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import {ExpenseTypeService} from '../../../services/expense-type.service';
@@ -33,7 +33,7 @@ export class ExpensesPanelComponent implements OnInit {
   constructor(
     private expenseService: ExpenseService,
     private departmentService: DepartmentService,
-    private employeeService: EmployeeService,
+    private userService: UserService,
     private expenseTypeService: ExpenseTypeService,
 
     private fb: FormBuilder
@@ -73,7 +73,7 @@ export class ExpensesPanelComponent implements OnInit {
   }
 
   loadEmployees() {
-    this.employeeService.getEmployees().subscribe(data => {
+    this.userService.getUsers().subscribe(data => {
       this.employees = data;
       this.filteredEmployees = data
     });
@@ -102,7 +102,6 @@ export class ExpensesPanelComponent implements OnInit {
       this.filteredExpenses = filteredExpenses;
       return;
     }
-    this.filteredExpenses = this.expenses
   }
 
   resetFilters() {
@@ -116,7 +115,7 @@ export class ExpensesPanelComponent implements OnInit {
     this.editingExpense = expense;
     this.editForm.patchValue({
       sum: expense.sum,
-      date: expense.date,
+      date: new Date(expense.date).toISOString().split('T')[0],
       expenseType: expense.expenseType._id
     });
   }
@@ -124,10 +123,17 @@ export class ExpensesPanelComponent implements OnInit {
   saveExpense() {
     if (this.editingExpense) {
       const updatedExpense = {...this.editingExpense, ...this.editForm.value};
+      console.log('Date', updatedExpense.date)
       this.expenseService.updateExpense(updatedExpense).subscribe(() => {
         this.loadExpenses();
         this.editingExpense = null;
       });
     }
+  }
+
+  deleteExpense(id: any) {
+      this.expenseService.deleteExpense(id).subscribe(() => {
+        this.loadExpenses();
+      });
   }
 }

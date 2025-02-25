@@ -1,0 +1,58 @@
+<form (ngSubmit)="onSubmit()"
+      #loginForm="ngForm">
+  <div *ngIf="signupFailed" class="error">
+    {{ signUpError }}
+  </div>
+  <div>
+    <label for="firstname">Firstname</label>
+    <input
+      type="text"
+      id="firstname"
+      name="firstname"
+      [(ngModel)]="user.firstname"
+      required
+    />
+  </div>
+  <div>
+    <label for="lastname">Lastname</label>
+    <input
+      type="text"
+      id="lastname"
+      name="lastname"
+      [(ngModel)]="user.lastname"
+      required
+    />
+  </div>
+  <div>
+    <label for="department">Department</label>
+    <select
+      id="department"
+      name="department"
+      [(ngModel)]="user.department"
+    >
+      <option *ngFor="let dep of departments" [value]="dep._id">{{ dep.name }}</option>
+    </select>
+  </div>
+  <div>
+    <label for="email">Email</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      [(ngModel)]="user.email"
+      required
+    />
+  </div>
+  <div>
+    <label for="password">Password</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      [(ngModel)]="user.password"
+      required
+    />
+  </div>
+  <button type="submit" [disabled]="!loginForm.valid">Sign up</button>
+</form>
+

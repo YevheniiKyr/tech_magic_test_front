@@ -1,0 +1,151 @@
+.budgets {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+}
+
+.budget-details {
+  background: #f8f9fa;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-left: 6px solid #007bff;
+  transition: transform 0.2s ease-in-out;
+}
+
+.budget-details:hover {
+  transform: translateY(-3px);
+}
+
+.budget-details p {
+  margin: 6px 0;
+}
+
+.budget-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.budget-buttons button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s ease-in-out;
+}
+
+.budget-buttons .edit-btn {
+  background: #3f5dd5;
+  color: #fff;
+}
+
+.budget-buttons .edit-btn:hover {
+  background: #221cc6;
+}
+
+.budget-buttons .delete-btn {
+  background: #dc3545;
+  color: #fff;
+}
+
+.budget-buttons .delete-btn:hover {
+  background: #c82333;
+}
+
+
+
+.edit-form {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 20px auto;
+  text-align: left;
+}
+
+.edit-form h3 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+h2 {
+  margin-bottom: 0;
+}
+
+.edit-form label {
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.edit-form input,
+.edit-form select {
+  width: 80%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.edit-form button {
+  width: 40%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 15px;
+  margin-right: 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.edit-form button:hover {
+  background-color: #0056b3;
+}
+
+
+input, textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn {
+  background-color: #007bff;
+  color: white;
+  transition: background 0.2s;
+}
+
+.btn.btn-create {
+  margin-top: 10px;
+  background-color: rgba(37, 161, 37, 0.78);
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+.create-form {
+  background: #f1f3f5;
+  padding: 16px;
+  border-radius: 8px;
+  margin-top: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

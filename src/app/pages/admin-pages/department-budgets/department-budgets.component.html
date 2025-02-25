@@ -1,0 +1,35 @@
+<div class="budgets">
+  <h2>{{ department.name }} budgets </h2>
+  <div *ngFor="let budget of budgets" class="budget-details">
+    <div *ngIf="editingBudget && editingBudget._id === budget._id; else viewMode">
+      <!-- Форма редагування -->
+      <form class="edit-form" (ngSubmit)="saveEdit()">
+        <h3>{{ (budget.month | monthNumToString) + ' ' + budget.year }}</h3>
+        <p>Allocated sum</p>
+        <input type="text" name="name" [(ngModel)]="editingBudget.allocatedSum" placeholder="Sum" required/>
+        <button type="submit" class="btn">Save</button>
+        <button type="button" class="btn cancel" (click)="cancelEditing()">Cancel</button>
+      </form>
+    </div>
+
+    <ng-template #viewMode>
+      <p>{{ (budget.month | monthNumToString) + ' ' + budget.year }}</p>
+      <p><strong>Виділена сума: </strong> {{ budget.allocatedSum }}</p>
+      <p><strong>Витрачено: </strong> {{ budget.spentSum }}</p>
+      <p><strong>Залишок: </strong> {{ budget.carriedOverAmount }}</p>
+
+      <div class="budget-buttons">
+        <button class="edit-btn" (click)="editBudget(budget)">Edit</button>
+        <button class="delete-btn" (click)="deleteBudget(budget._id)">Delete</button>
+      </div>
+    </ng-template>
+
+  </div>
+  <h2> Create budget </h2>
+  <form class="create-form" (ngSubmit)="createBudget()">
+    <p>Month</p><input type="text" [(ngModel)]="newBudget.month" name="month" placeholder="Month" required/>
+    <p>Year</p><input type="text" [(ngModel)]="newBudget.year" name="year" placeholder="Year" required/>
+    <p>Allocated Sum</p><input type="text" [(ngModel)]="newBudget.allocatedSum" name="allocatedSum" placeholder="Allocated sum" required/>
+    <button type="submit" class="btn btn-create">Create budget</button>
+  </form>
+</div>

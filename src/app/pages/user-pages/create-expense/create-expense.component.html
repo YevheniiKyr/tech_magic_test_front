@@ -1,0 +1,35 @@
+<div class="create-expense-container">
+  <h2>Create expense</h2>
+  <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="type">Type:</label>
+      <select id="type" formControlName="type" class="form-control">
+        <option value="" disabled>Choose type</option>
+        <option *ngFor="let type of expenseTypes" [value]="type._id">{{ type.name }}</option>
+      </select>
+      <div *ngIf="expenseForm.get('type')?.invalid && expenseForm.get('type')?.touched" class="error">
+        Please, choose expense type.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="sum">Sum:</label>
+      <input type="number" id="sum" formControlName="sum" class="form-control" placeholder="Sum" />
+      <div *ngIf="expenseForm.get('sum')?.invalid && expenseForm.get('sum')?.touched" class="error">
+        Sum must be more than 0.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="date">Date:</label>
+      <input type="date" id="date" formControlName="date" class="form-control" />
+      <div *ngIf="expenseForm.get('date')?.invalid && expenseForm.get('date')?.touched" class="error">
+       Please, choose date.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="expenseForm.invalid || loading">
+      {{ loading ? 'Creating...' : 'Create' }}
+    </button>
+  </form>
+</div>

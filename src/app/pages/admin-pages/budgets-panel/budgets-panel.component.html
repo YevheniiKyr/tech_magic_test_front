@@ -22,10 +22,10 @@
   </thead>
   <tbody>
   <tr *ngFor="let budget of filteredBudgets">
-    <td>{{ budget.department }}</td>
-    <td>{{ budget.month }}</td>
+    <td>{{ budget.department.name }}</td>
+    <td>{{ budget.month | monthNumToString }}</td>
     <td>{{ budget.year }}</td>
-    <td>{{ budget.amount | currency }}</td>
+    <td>{{ budget.allocatedSum }}</td>
     <td>
       <button class="btn" (click)="editBudget(budget)">Edit</button>
       <button class="btn" (click)="deleteBudget(budget.id)">Delete</button>

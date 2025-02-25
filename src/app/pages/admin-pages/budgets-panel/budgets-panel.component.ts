@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { BudgetService } from '../../../services/budget.service';
 import {CurrencyPipe, NgForOf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {MonthNumToStringPipe} from '../../../pipes/month-num-to-string.pipe';
 
 @Component({
   selector: 'app-budgets-panel',
   templateUrl: './budgets-panel.component.html',
   imports: [
     NgForOf,
-    CurrencyPipe,
-    FormsModule
+    FormsModule,
+    MonthNumToStringPipe
   ],
   styleUrls: ['./budgets-panel.component.css']
 })

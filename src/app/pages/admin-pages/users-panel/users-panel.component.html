@@ -1,1 +1,81 @@
-<p>users-panel works!</p>
+<div class="user-panel">
+  <h2>User panel</h2>
+
+  <div class="filters">
+    <label>
+      Department:
+      <select [(ngModel)]="selectedDepartment" (change)="filterUsers()">
+        <option *ngFor="let dept of departments" [value]="dept._id">{{ dept.name }}</option>
+      </select>
+    </label>
+    <label>
+      Employee:
+      <select [(ngModel)]="selectedUserId" (change)="setSelectedUser()">
+        <option *ngFor="let user of filteredUsers" [value]="user._id">{{ user.firstname + ' ' + user.lastname }}
+        </option>
+      </select>
+    </label>
+    <button (click)="resetFilters()">Reset filters</button>
+  </div>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Email</th>
+      <th>Department</th>
+      <th>Role</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngIf="selectedUser; else usersBlock">
+      <td>{{ selectedUser.firstname }}</td>
+      <td>{{ selectedUser.lastname }}</td>
+      <td>{{ selectedUser.email }}</td>
+      <td>{{ selectedUser.department.name }}</td>
+      <td>{{ selectedUser.role }}</td>
+      <td>
+        <button (click)="editUser(selectedUser)">Edit</button>
+        <button (click)="deleteUser(selectedUser._id)">Delete</button>
+      </td>
+    </tr>
+    <ng-template #usersBlock>
+      <tr *ngFor="let user of filteredUsers">
+        <td>{{ user.firstname }}</td>
+        <td>{{ user.lastname }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.department.name }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+          <button (click)="editUser(user)">Edit</button>
+          <button (click)="deleteUser(user._id)">Delete</button>
+        </td>
+      </tr>
+    </ng-template>
+    </tbody>
+  </table>
+
+  <div *ngIf="editingUser" class="edit-form">
+    <h3>User edit</h3>
+    <form [formGroup]="editForm" (ngSubmit)="saveUser()">
+      <label>Firstname: <input formControlName="firstname" type="text"/></label>
+      <label>Lastname: <input formControlName="lastname" type="text"/></label>
+      <label>Email: <input formControlName="email" type="text"/></label>
+      <label>Role:
+        <select formControlName="role">
+          <option>admin</option>
+          <option>employee</option>
+        </select>
+      </label>
+      <label>Department:
+        <select formControlName="department">
+          <option *ngFor="let department of departments" [value]="department._id">{{ department.name }}</option>
+        </select>
+      </label>
+      <button type="submit">Save</button>
+    </form>
+  </div>
+</div>
+

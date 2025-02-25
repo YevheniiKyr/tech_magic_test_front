@@ -1,33 +1,33 @@
 <div class="expenses-panel">
-  <h2>Панель витрат</h2>
+  <h2>Expenses panel</h2>
 
   <div class="filters">
     <label>
-      Відділ:
+      Department:
       <select [(ngModel)]="selectedDepartment" (change)="filterEmployees(); filterExpenses()">
         <option *ngFor="let dept of departments" [value]="dept._id">{{ dept.name }}</option>
       </select>
     </label>
 
     <label>
-      Співробітник:
+      Employee:
       <select [(ngModel)]="selectedEmployee" (change)="filterExpenses()">
         <option *ngFor="let emp of filteredEmployees" [value]="emp._id">{{ emp.firstname + ' ' + emp.lastname }}
         </option>
       </select>
     </label>
 
-    <button (click)="resetFilters()">Очистити фільтри</button>
+    <button (click)="resetFilters()">Reset filters</button>
 
   </div>
 
   <table>
     <thead>
     <tr>
-      <th>Сума</th>
-      <th>Дата</th>
-      <th>Тип витрати</th>
-      <th>Дія</th>
+      <th>Sum</th>
+      <th>Date</th>
+      <th>Type</th>
+      <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -36,23 +36,24 @@
       <td>{{ expense.date | date }}</td>
       <td>{{ expense.expenseType.name }}</td>
       <td>
-        <button (click)="editExpense(expense)">Редагувати</button>
+        <button (click)="editExpense(expense)">Edit</button>
+        <button (click)="deleteExpense(expense._id)">Delete</button>
       </td>
     </tr>
     </tbody>
   </table>
 
   <div *ngIf="editingExpense" class="edit-form">
-    <h3>Редагування витрати</h3>
+    <h3>Edit expense</h3>
     <form [formGroup]="editForm" (ngSubmit)="saveExpense()">
-      <label>Сума: <input formControlName="sum" type="number"/></label>
-      <label>Дата: <input formControlName="date" type="date"/></label>
-      <label>Тип:
+      <label>Sum: <input formControlName="sum" type="number"/></label>
+      <label>Date: <input formControlName="date" type="date"/></label>
+      <label>Type:
         <select formControlName="expenseType">
           <option *ngFor="let type of expenseTypes" [value]="type._id">{{ type.name }}</option>
         </select>
       </label>
-      <button type="submit">Зберегти</button>
+      <button type="submit">Save</button>
     </form>
   </div>
 </div>

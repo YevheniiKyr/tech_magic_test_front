@@ -1,0 +1,12 @@
+<nav class="nav-bar">
+  <ul *ngIf=" menuItems.length > 0" class="nav-list">
+    <li *ngFor="let item of menuItems" class="nav-item">
+      <a [routerLink]="item.path" class="nav-link">{{ item.label }}</a>
+    </li>
+  </ul>
+  <button *ngIf="isAuthenticated(); else loginBtn" class="logout-btn" (click)="logout()">Log out</button>
+  <ng-template #loginBtn>
+    <a routerLink="/login" class="login-btn">Sign in</a>
+  </ng-template>
+    <a *ngIf="!isAuthenticated()" routerLink="/signup" class="login-btn">Sign up</a>
+</nav>

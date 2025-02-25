@@ -1,10 +1,11 @@
 <div class="departments-container">
+  <h1> Departments </h1>
   <div *ngFor="let department of departments" class="department-card">
-    <div *ngIf="editingDepartment && editingDepartment.id === department.id; else viewMode">
+    <div *ngIf="editingDepartment && editingDepartment._id === department._id; else viewMode">
       <!-- Форма редагування -->
       <form class="edit-form" (ngSubmit)="saveEdit()">
-        <input type="text" [(ngModel)]="editingDepartment.name" placeholder="Department Name" required />
-        <textarea [(ngModel)]="editingDepartment.description" placeholder="Description" required></textarea>
+        <input type="text" name="name" [(ngModel)]="editingDepartment.name" placeholder="Department Name" required />
+        <input name="description" [(ngModel)]="editingDepartment.employeeCount" placeholder="Amount of employees" required/>
         <button type="submit" class="btn">Save</button>
         <button type="button" class="btn cancel" (click)="cancelEditing()">Cancel</button>
       </form>
@@ -12,16 +13,18 @@
 
     <ng-template #viewMode>
       <h3>{{ department.name }}</h3>
-      <p>{{ department.description }}</p>
+      <p> Amount of employees: {{ department.employeeCount }}</p>
       <button class="btn" (click)="startEditing(department)">Edit</button>
-      <button class="btn delete" (click)="deleteDepartment(department.id)">Delete</button>
+      <button class="btn delete" (click)="deleteDepartment(department._id)">Delete</button>
+      <button class="btn budgets" (click)="navToBudgets(department._id)">Manage budgets</button>
     </ng-template>
   </div>
 
   <!-- Форма створення відділу -->
+  <h2> Create department </h2>
   <form class="create-form" (ngSubmit)="createDepartment()">
     <input type="text" [(ngModel)]="newDepartment.name" name="name" placeholder="Department Name" required />
-    <textarea [(ngModel)]="newDepartment.description" name="description" placeholder="Description" required></textarea>
+    <textarea [(ngModel)]="newDepartment.employeeCount" name="description" placeholder="Employee count" required></textarea>
     <button type="submit" class="btn">Create Department</button>
   </form>
 </div>

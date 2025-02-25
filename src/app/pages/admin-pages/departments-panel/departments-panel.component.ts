@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DepartmentService } from '../../../services/department.service';
 import { FormsModule } from '@angular/forms';
 import {NgForOf, NgIf} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-departments-panel',
@@ -11,10 +12,13 @@ import {NgForOf, NgIf} from '@angular/common';
 })
 export class DepartmentsPanelComponent implements OnInit {
   departments: any[] = [];
-  newDepartment = { name: '', description: '' };
+  newDepartment = { name: '', employeeCount: 0 };
   editingDepartment: any = null;
 
-  constructor(private departmentsService: DepartmentService) {}
+  constructor(
+    private departmentsService: DepartmentService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.loadDepartments();
@@ -27,10 +31,10 @@ export class DepartmentsPanelComponent implements OnInit {
   }
 
   createDepartment() {
-    if (!this.newDepartment.name || !this.newDepartment.description) return;
+    if (!this.newDepartment.name || !this.newDepartment.employeeCount) return;
 
     this.departmentsService.createDepartment(this.newDepartment).subscribe(() => {
-      this.newDepartment = { name: '', description: '' };
+      this.newDepartment = { name: '', employeeCount: 0 };
       this.loadDepartments();
     });
   }
@@ -44,7 +48,7 @@ export class DepartmentsPanelComponent implements OnInit {
   }
 
   saveEdit() {
-    if (!this.editingDepartment.name || !this.editingDepartment.description) return;
+    if (!this.editingDepartment.name || !this.editingDepartment.employeeCount) return;
 
     this.departmentsService.updateDepartment(this.editingDepartment).subscribe(() => {
       this.editingDepartment = null;
@@ -58,5 +62,11 @@ export class DepartmentsPanelComponent implements OnInit {
         this.loadDepartments();
       });
     }
+  }
+
+  navToBudgets(id: any){
+    console.log('id', id)
+    return this.router.navigate([`/departments-panel/department/${id}/budgets`]);
+
   }
 }

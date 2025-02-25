@@ -1,0 +1,13 @@
+<div class="expenses-container">
+  <h2>My expenses</h2>
+  <div *ngIf="expenses.length === 0" class="no-expenses">
+    <p>You don't have expenses yet</p>
+  </div>
+  <div *ngFor="let expense of expenses" class="expense-item">
+    <div class="expense-details">
+      <p><strong>Вид витрат:</strong> {{ expense.expenseType.name }}</p>
+      <p><strong>Сума:</strong> {{ expense.sum }} grn</p>
+      <p><strong>Дата:</strong> {{ expense.date | date }}</p>
+    </div>
+  </div>
+</div>

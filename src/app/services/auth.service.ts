@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {SignUp} from '../types/signup';
+import {jwtDecode} from 'jwt-decode';
 
 
 
@@ -27,4 +28,12 @@ export class AuthService {
     return this.http.post<UserLogin>(`${this.apiUrl}/register`, user);
 
   }
+
+  getCurrentUser() {
+    const token = localStorage.getItem('token');
+    if (!token) return null;
+    const decoded: any = jwtDecode(token);
+    return decoded;
+  }
+
 }

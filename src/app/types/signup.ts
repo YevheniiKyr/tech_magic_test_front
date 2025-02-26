@@ -6,9 +6,4 @@ export interface SignUp {
   department: string;
 }
 
-enum Roles {
-  ADMIN = "admin",
-  EMPLOYEE = "employee",
-}
 
-type Role = Roles.ADMIN | Roles.EMPLOYEE;

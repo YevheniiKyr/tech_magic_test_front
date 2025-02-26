@@ -36,7 +36,6 @@ export class NavigationComponent implements OnInit {
     const token = localStorage.getItem('token');
     if (!token) return null;
     const decoded: any = jwtDecode(token);
-    console.log(decoded.role);
     return decoded.role;
   }
 
@@ -48,22 +47,20 @@ export class NavigationComponent implements OnInit {
     }
 
     const role = this.getUserRole();
-    console.log("Role", role);
-    if (role === 'admin') {
-      console.log("Administrator");
-      this.menuItems = [
-        { path: '/expenses-panel', label: 'Expenses' },
-        // { path: '/create-expense', label: 'Create expense' },
-        { path: '/budgets-panel', label: 'Budgets' },
-        { path: '/departments-panel', label: 'Departments' },
-        { path: '/users-panel', label: 'Users' }
-      ];
-    } else if (role === 'employee') {
-      console.log("Employee");
+    console.log('Role', role);
+     if (role === 'employee' || role === 'admin') {
       this.menuItems = [
         { path: '/expenses', label: 'My expenses' },
         { path: '/create-expense', label: 'Create expense' },
       ];
+    }
+    if (role === 'admin') {
+      this.menuItems = this.menuItems.concat([
+        { path: '/expenses-panel', label: 'Expenses' },
+        { path: '/budgets-panel', label: 'Budgets' },
+        { path: '/departments-panel', label: 'Departments' },
+        { path: '/users-panel', label: 'Users' }
+      ]);
     }
   }
 

@@ -1,5 +1,5 @@
 export interface Expense {
-  id?: string;
+  _id?: string;
   expenseType: string; //id of expenseType
   employee: string;
   department: string;

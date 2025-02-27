@@ -1,12 +1,33 @@
 <nav class="nav-bar">
+  <div class="desktop-menu">
   <ul *ngIf=" menuItems.length > 0" class="nav-list">
     <li *ngFor="let item of menuItems" class="nav-item">
       <a [routerLink]="item.path" class="nav-link">{{ item.label }}</a>
     </li>
   </ul>
+  </div>
+  <div class="mobile-menu">
+    <input type="checkbox" id="menu-toggle" />
+    <label id="label-for-icon" for="menu-toggle" class="menu-icon">
+      <svg class = 'menu-toggle' width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <rect class="top" y="8" width="40" height="4" rx="2" fill="black" id = "rect-1"/>
+        <rect class="middle" y="18" width="40" height="4" rx="2" fill="black" id = "rect-2"/>
+        <rect class="bottom" y="28" width="40" height="4" rx="2" fill="black" id = "rect-3"/>
+      </svg>
+      <svg viewBox="0 0 24 24" class="menu-cross" width="40" height="40">
+        <path d="M6 6L18 18" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M18 6L6 18" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </label>
+    <ul class="mobile-menu-options">
+      <li *ngFor="let item of menuItems" class="nav-item">
+        <a [routerLink]="item.path" class="nav-link">{{ item.label }}</a>
+      </li>
+    </ul>
+  </div>
   <button *ngIf="isAuthenticated(); else loginBtn" class="logout-btn" (click)="logout()">Log out</button>
   <ng-template #loginBtn>
     <a routerLink="/login" class="login-btn">Sign in</a>
   </ng-template>
-    <a *ngIf="!isAuthenticated()" routerLink="/signup" class="login-btn">Sign up</a>
+  <a *ngIf="!isAuthenticated()" routerLink="/signup" class="login-btn">Sign up</a>
 </nav>

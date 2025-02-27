@@ -1,5 +1,5 @@
 <form (ngSubmit)="onSubmit()"
-  #loginForm="ngForm">
+      #loginForm="ngForm">
   <div *ngIf="loginFailed" class="error">
     {{ loginError }}
   </div>
@@ -9,9 +9,16 @@
       type="email"
       id="email"
       name="email"
+      pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+      #email="ngModel"
       [(ngModel)]="user.email"
       required
     />
+    <div *ngIf="email.invalid && email.touched" class="error">
+      <p *ngIf="email.hasError('required')">Email is required</p>
+      <p *ngIf="email.errors?.['pattern']">Invalid email format</p>
+    </div>
+
   </div>
   <div>
     <label for="password">Password</label>
@@ -19,9 +26,13 @@
       type="password"
       id="password"
       name="password"
+      #password="ngModel"
       [(ngModel)]="user.password"
       required
     />
+    <div *ngIf="password.invalid && password.touched" class="error">
+      <p *ngIf="password.errors?.['required']">Password is required</p>
+    </div>
   </div>
   <button type="submit" [disabled]="!loginForm.valid">Login</button>
 </form>

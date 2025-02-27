@@ -1,37 +1,38 @@
-<div class="filters">
-  <label for="department">Department</label>
-  <select id="department" [(ngModel)]="filters.department">
-    <option *ngFor="let department of departments" [value]="department">{{ department }}</option>
-  </select>
+<div class="budgets-panel">
+  <h2> Budgets panel</h2>
+  <div class="filters">
+    <label for="department">Department</label>
+    <select id="department" [(ngModel)]="filters.department" (change)="applyFilters()">
+      <option *ngFor="let department of departments" [value]="department._id">{{ department.name }}</option>
+    </select>
 
-  <label for="month">Month</label>
-  <input type="month" id="month" [(ngModel)]="filters.month">
+    <label for="month">Month</label>
+    <input type="month" id="month" [(ngModel)]="filters.period" (change)="applyFilters()">
 
-  <button class="btn" (click)="applyFilters()">Apply Filters</button>
+    <button class="btn" (click)="resetFilters()">Reset filters</button>
+  </div>
+
+  <table class="budget-table">
+    <thead>
+    <tr>
+      <th>Department</th>
+      <th>Month</th>
+      <th>Year</th>
+      <th>Budget</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let budget of filteredBudgets">
+      <td>{{ budget.department.name }}</td>
+      <td>{{ budget.month | monthNumToString }}</td>
+      <td>{{ budget.year }}</td>
+      <td>{{ budget.allocatedSum }}</td>
+      <td>
+        <button class="btn" (click)="editBudget(budget)">Edit</button>
+        <button class="btn" (click)="deleteBudget(budget.id)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>
-
-<table class="budget-table">
-  <thead>
-  <tr>
-    <th>Department</th>
-    <th>Month</th>
-    <th>Year</th>
-    <th>Budget</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let budget of filteredBudgets">
-    <td>{{ budget.department.name }}</td>
-    <td>{{ budget.month | monthNumToString }}</td>
-    <td>{{ budget.year }}</td>
-    <td>{{ budget.allocatedSum }}</td>
-    <td>
-      <button class="btn" (click)="editBudget(budget)">Edit</button>
-      <button class="btn" (click)="deleteBudget(budget.id)">Delete</button>
-    </td>
-  </tr>
-  </tbody>
-</table>
-
-<button class="btn" (click)="openCreateForm()">Create New Budget</button>

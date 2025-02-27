@@ -42,9 +42,12 @@ export class LoginComponent {
       (error) => {
         this.loginFailed = true;
         this.loginError = error.error.message;
+        console.log('error', error.error);
       }
     );
   }
 
+  protected readonly JSON = JSON;
+  protected readonly RegExp = RegExp;
 }
 

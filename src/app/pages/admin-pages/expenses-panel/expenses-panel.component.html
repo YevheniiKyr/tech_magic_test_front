@@ -36,8 +36,8 @@
       <td>{{ expense.date | date }}</td>
       <td>{{ expense.expenseType.name }}</td>
       <td>
-        <button (click)="editExpense(expense)">Edit</button>
-        <button (click)="deleteExpense(expense._id)">Delete</button>
+        <button class='btn edit-btn' (click)="editExpense(expense)">Edit</button>
+        <button class='btn delete-btn' (click)="deleteExpense(expense._id)">Delete</button>
       </td>
     </tr>
     </tbody>

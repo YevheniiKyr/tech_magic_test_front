@@ -52,7 +52,7 @@ export class CreateExpenseComponent implements OnInit {
         this.expenseTypes = data;
       },
       (error) => {
-        console.error('Помилка при отриманні типів витрат:', error);
+        console.error('Error while fetching expense types:', error);
       }
     );
   }
@@ -76,11 +76,11 @@ export class CreateExpenseComponent implements OnInit {
 
     this.expenseService.createExpense(expense).subscribe(
       (response) => {
-        console.log('Витрату успішно створено!', response);
+        console.log('Expense was successfully created!', response);
         this.router.navigate(['/expenses']); // Перенаправляємо на сторінку витрат
       },
       (error) => {
-        console.error('Помилка при створенні витрати:', error);
+        console.error('Error while creating expense:', error);
         this.loading = false;
       }
     );

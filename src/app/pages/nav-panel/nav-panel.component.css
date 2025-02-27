@@ -7,10 +7,15 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.desktop-menu {
+  flex: 0 0 70%;
+}
+
 .nav-list {
   list-style: none;
   display: flex;
   gap: 20px;
+  justify-content: space-between;
   padding: 0;
   margin: 0;
 }
@@ -33,6 +38,24 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
+
+.menu-burger-options,
+.menu-options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-menu-options a,
+.menu-options a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.mobile-menu {
+  display: none;
+}
+
 .logout-btn, .login-btn {
   background: white;
   color: #007bff;
@@ -50,3 +73,76 @@
   color: white;
   border-color: #0056b3;
 }
+
+@media (max-width: 768px) {
+  .desktop-menu {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: flex;
+    margin-right: 40vw;
+  }
+
+  .mobile-menu-options {
+    font-size: .8rem;
+  }
+
+  .mobile-menu-options li {
+    margin-top: 2vh;
+  }
+
+
+  .mobile-menu-options li:nth-child(1) {
+    margin-top: 0;
+  }
+
+  .reg button {
+    font-size: 0.75rem;
+  }
+
+  #menu-toggle {
+    display: none;
+  }
+
+  #menu-toggle:checked ~ .menu-icon .menu-toggle {
+    display: none;
+  }
+
+  #menu-toggle:checked ~ .menu-icon .menu-cross {
+    display: flex;
+  }
+
+  #menu-toggle:not(:checked) ~ .menu-icon .menu-toggle {
+    display: flex;
+    /*transition: transform 2.5s ease*/
+
+  }
+
+  #menu-toggle:not(:checked) ~ .menu-icon .menu-cross {
+    display: none;
+  }
+
+  #menu-toggle:checked ~ .mobile-menu-options {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    margin-top: 40px;
+    background: rgba(241, 235, 235, 0.93);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+  }
+
+  .menu-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+  }
+
+  .mobile-menu-options {
+    display: none;
+  }
+}
+
+

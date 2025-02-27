@@ -1,3 +1,12 @@
+.budgets-panel {
+  margin: 20px auto;
+  text-align: center;
+}
+
+.budgets-panel h2 {
+  margin-bottom: 20px;
+}
+
 .filters {
   margin-bottom: 20px;
 }
@@ -10,17 +19,38 @@
   margin-right: 15px;
 }
 
-.budget-table {
+table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.budget-table th, .budget-table td {
+table th, table td {
   padding: 10px;
-  text-align: left;
   border: 1px solid #ddd;
+  text-align: center;
 }
+
+table th {
+  background: #007bff;
+  color: white;
+}
+
+table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+table tr:hover {
+  background: #f1f1f1;
+}
+
+table button:nth-child(1) {
+  margin-right: 20px;
+}
+
 
 button {
   padding: 5px 10px;
